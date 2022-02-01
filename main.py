@@ -3,7 +3,7 @@ def parse(file):
   currLine = []
   with open(file, 'r') as f:
     for char in f.read():
-      if char != '\n': 
+      if char != '\n':
         currLine.append(char)
       else:
         lines.append(currLine)
@@ -85,20 +85,21 @@ def exe(lines):
   loop = True
   while loop:
     try:
-      val = lines[coord[0]][coord[1]]
-      if val != "!" or val != "!" and val != "?" and stack[-1] != 0:
-        if val not in "<>^v": stack = doStack(val, stack)
-        else: moveDir = doDir(val)
+      val = lines[coord[0]][coord[1]] 
+      if val != "!":
+        if val == "?" and stack[-1] == 0:
+          if moveDir == "+x": coord[1] += 2
+          elif moveDir == "-x": coord[1] -= 2
+          elif moveDir == "+y": coord[0] -= 2
+          elif moveDir == "-y": coord[0] += 2
+        else:
+          if val not in "<>^v": stack = doStack(val, stack)
+          else: moveDir = doDir(val)
 
-        if moveDir == "+x": coord[1] += 1
-        elif moveDir == "-x": coord[1] -= 1
-        elif moveDir == "+y": coord[0] -= 1
-        elif moveDir == "-y": coord[0] += 1
-      elif val == "?":
-        if moveDir == "+x": coord[1] += 2
-        elif moveDir == "-x": coord[1] -= 2
-        elif moveDir == "+y": coord[0] -= 2
-        elif moveDir == "-y": coord[0] += 2
+          if moveDir == "+x": coord[1] += 1
+          elif moveDir == "-x": coord[1] -= 1
+          elif moveDir == "+y": coord[0] -= 1
+          elif moveDir == "-y": coord[0] += 1
       elif coord[0] != abs(coord[0]) or coord[1] != abs(coord[1]): loop = False
       else: loop = False
     except IndexError:
