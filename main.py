@@ -1,3 +1,5 @@
+import sys
+
 def parse(file):
   lines = []
   currLine = []
@@ -48,12 +50,16 @@ def exe(lines):
       stack.pop(-1)
       stack.pop(-1)
       stack.append(n)
+    elif v == "$": # Removes the top value of the Stack
+      stack.pop(-1)
     elif v == "c": # Print ASCII Char of top num
-      print(chr(stack[-1]))
+      print(chr(stack[-1]), end="")
     elif v == "n": # Print top num
-      print(stack[-1])
+      print(stack[-1], end="")
     elif v == ",": # Add ASCII Code of input onto the Stack
       stack.append(ord(input()[0]))
+    elif v == "#": # Add int of input onto the Stack
+      stack.append(int(input()[0]))
     elif v == ":": # Duplicate the top number onto the Stack
       stack.append(stack[-1])
     elif v in "1234567890": # Add typed number onto the Stack
@@ -106,4 +112,4 @@ def exe(lines):
       print("Index Error")
       loop = False
 
-exe(fmt(parse("ex.td")))
+exe(fmt(parse(sys.argv[1])))

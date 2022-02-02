@@ -6,6 +6,9 @@ __pycache__/
 # Replit
 *.replit
 
+# ISE
+*.ise
+
 # C extensions
 *.so
 
